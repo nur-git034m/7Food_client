@@ -8,6 +8,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:seven_food_client/data/models/shops_models.dart';
 import 'package:seven_food_client/screens/action_choice/your_choice.dart';
+import 'package:seven_food_client/screens/qr_page_screen/open_with_id.dart';
 import 'package:seven_food_client/services/qr_page_service.dart';
 import 'package:seven_food_client/services/shop_product_service/list_shop_product_service.dart';
 
@@ -19,14 +20,14 @@ class QrPageScreen extends StatefulWidget {
 }
 
 class _QrPageScreenState extends State<QrPageScreen> {
-  List showcasID = [];
+  List showcasesID = [];
 
   void getLength() async {
     showInfo = await ListShopsService().getListofLocations()  ;
      for(var i in showInfo.data){
-        showcasID.add(i.id);
+        showcasesID.add(i.id);
     }
-    print(' $showcasID');
+    print(' $showcasesID');
   }
    @override
    void initState() { 
@@ -38,13 +39,14 @@ class _QrPageScreenState extends State<QrPageScreen> {
 
   late ListShops showInfo;
 
-  final String pin_code = '123456';
+ 
 
   final textEditingController = TextEditingController();
 
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  final OpenWithID _openWithID = OpenWithID();
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -64,7 +66,7 @@ class _QrPageScreenState extends State<QrPageScreen> {
     controller.scannedDataStream.listen((scanData) {
       print('ScanData code: ${scanData.code}');
       controller.pauseCamera();
-      if(showcasID.contains(int.parse(scanData.code))){
+      if(showcasesID.contains(int.parse(scanData.code))){
         
         QrService().postQrScanner(scanData.code, context);
       }else{
@@ -116,64 +118,65 @@ class _QrPageScreenState extends State<QrPageScreen> {
                   ),
                 ],
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height * 0.041,),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: PinCodeTextField(
-                          length: 6,
-                          obscureText: false,
-                          keyboardType: TextInputType.phone,
-                          pinTheme: PinTheme(
-                            activeColor: Colors.green,
-                            inactiveColor: const Color(0xFF613EEA),
-                            activeFillColor: Colors.white,
-                          ),
-                          onChanged: (value) {
-                            print(value);
-                          },
-                          onCompleted: (value) {
-                            if (value == pin_code) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                     const YourChoicePage() ));
-                            }
-                          },
-                          appContext: context,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height * 0.02,),
-                    child: const Text(
-                      'Ввести код который отоброжен на холодильнике ',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  IconButton(
-                    icon: const Icon(FontAwesomeIcons.times),
-                    onPressed: () {},
-                    color: const Color(0xFF613EEA),
-                    iconSize: 34,
-                  )
-                ],
-              )
+           _openWithID.getOpenWithID( showcasesID , controller, context),
+              // Column(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Container(
+              //       padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height * 0.041,),
+              //       child: Center(
+              //         child: Padding(
+              //           padding: const EdgeInsets.all(8.0),
+              //           child: PinCodeTextField(
+              //             length: 6,
+              //             obscureText: false,
+              //             keyboardType: TextInputType.phone,
+              //             pinTheme: PinTheme(
+              //               activeColor: Colors.green,
+              //               inactiveColor: const Color(0xFF613EEA),
+              //               activeFillColor: Colors.white,
+              //             ),
+              //             onChanged: (value) {
+              //               print(value);
+              //             },
+              //             onCompleted: (value) {
+              //               if (value == pin_code) {
+              //                 Navigator.push(
+              //                     context,
+              //                     MaterialPageRoute(
+              //                         builder: (context) =>
+              //                        const YourChoicePage() ));
+              //               }
+              //             },
+              //             appContext: context,
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //     const SizedBox(
+              //       height: 15,
+              //     ),
+              //      Padding(
+              //       padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height * 0.02,),
+              //       child: const Text(
+              //         'Ввести код который отоброжен на холодильнике ',
+              //         textAlign: TextAlign.center,
+              //         style: TextStyle(
+              //           fontSize: 20,
+              //         ),
+              //       ),
+              //     ),
+              //     const SizedBox(
+              //       height: 40,
+              //     ),
+              //     IconButton(
+              //       icon: const Icon(FontAwesomeIcons.times),
+              //       onPressed: () {},
+              //       color: const Color(0xFF613EEA),
+              //       iconSize: 34,
+              //     )
+              //   ],
+              // )
             ],
           ),
         ),

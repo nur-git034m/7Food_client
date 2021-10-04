@@ -16,7 +16,7 @@ class SuccessAdd extends StatelessWidget {
           'Детали добавления',
           const Icon(
             FontAwesomeIcons.times,
-          )),
+          ), true),
       body: Center(
         child: Container(
           padding: EdgeInsets.symmetric(vertical: screenSize.height * 0.1),

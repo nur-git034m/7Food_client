@@ -16,9 +16,7 @@ class HistoryOfProducts extends StatefulWidget {
 }
 
 class _HistoryOfProductsState extends State<HistoryOfProducts> {
-  final List<IconData> iconList = [Icons.home, Icons.person];
-  final List pages = [const List_shops_map(), const CardScreen()];
-  int _bottomNavIndex = 0;
+ 
   late Future<HistoryDetails> historyProductInfo;
   @override
   void initState() {
@@ -32,12 +30,8 @@ class _HistoryOfProductsState extends State<HistoryOfProducts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
-          context,
-          'История',
-          const Icon(
-            Icons.arrow_back_ios,
-          )),
+     appBar:
+          appBar(context, 'История', const Icon(Icons.arrow_back), true),
       body: FutureBuilder<HistoryDetails>(
         future: historyProductInfo,
         builder: (context, snapshot) {
@@ -203,21 +197,7 @@ class _HistoryOfProductsState extends State<HistoryOfProducts> {
           );
         },
       ),
-      floatingActionButton: MediaQuery.of(context).viewInsets.bottom == 0
-          ? floatinActionButton(context)
-          : const SizedBox(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: AnimatedBottomNavigationBar(
-          activeColor: AppColors.kActiveColor,
-          inactiveColor: AppColors.kInActiveColor,
-          icons: iconList,
-          activeIndex: _bottomNavIndex,
-          gapLocation: GapLocation.center,
-          onTap: (index) {
-            setState(() {
-              _bottomNavIndex = index;
-            });
-          }),
+    
     );
   }
 

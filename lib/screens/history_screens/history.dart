@@ -15,10 +15,7 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
-  bool _isselected = true;
-  final List<IconData> iconList = [Icons.home, Icons.person];
-  final List pages = [const List_shops_map(), const CardScreen()];
-  int _bottomNavIndex = 0;
+  
   @override
   Widget build(BuildContext context) {
     return const HistoryPage();

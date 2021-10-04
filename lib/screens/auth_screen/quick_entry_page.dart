@@ -199,10 +199,13 @@ class _QuickEntryPageState extends State<QuickEntryPage> {
                     onConfirm: (pin) {
                       if (pin_code == '1234') {
 // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ShowcaseList()), (route) => false);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>  const Homepage()));
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                                builder: (context) =>  const Homepage()), (route) => false);
+                        
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) =>  const Homepage()));
                       }
                     },
                     onBiometric: () {

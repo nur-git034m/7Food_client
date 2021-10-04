@@ -3,7 +3,7 @@ import 'package:seven_food_client/screens/qr_page_screen/qr_page_screen.dart';
 
 import 'color_constants.dart';
 
-AppBar appBar(BuildContext context, String text, Icon icon) {
+AppBar appBar(BuildContext context, String text, Icon icon , bool withBack) {
   return AppBar(
       toolbarHeight: 90,
       backgroundColor: AppColors.kbackground,
@@ -20,13 +20,14 @@ AppBar appBar(BuildContext context, String text, Icon icon) {
           fontSize: 20.0,
         ),
       ),
-      leading: IconButton(
+      leading: withBack?  IconButton(
         icon: icon,
         onPressed: () {
           Navigator.pop(context);
         },
-      ));
+      ): SizedBox());
 }
+
 
 FloatingActionButton floatinActionButton(context) {
   return FloatingActionButton(

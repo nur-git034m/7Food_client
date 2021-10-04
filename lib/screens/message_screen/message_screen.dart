@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:seven_food_client/constants/color_constants.dart';
+import 'package:seven_food_client/constants/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MessageScreen extends StatefulWidget {
@@ -16,6 +17,8 @@ class _MessageScreenState extends State<MessageScreen> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
+       appBar:
+          appBar(context, 'Техподдержка', const Icon(FontAwesomeIcons.times), true),
       backgroundColor: const Color(0xFFE5E5E5),
       body: SafeArea(
           child: Column(

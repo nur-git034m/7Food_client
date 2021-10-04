@@ -34,6 +34,7 @@ class _YourChoicePageState extends State<YourChoicePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: SafeArea(
         child: Container(
           height: MediaQuery.of(context).size.height * 1,
@@ -252,7 +253,8 @@ class _YourChoicePageState extends State<YourChoicePage> {
 
   Future<void> _initPusher() async {
     try {
-      await Pusher.init('74637838c2f684d6db41', PusherOptions(cluster: 'mt1'));
+      await Pusher.init('74637838c2f684d6db41',
+       PusherOptions(cluster: 'mt1'));
     } catch (e) {
       print(e);
     }

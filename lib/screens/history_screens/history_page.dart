@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:seven_food_client/constants/color_constants.dart';
+import 'package:seven_food_client/constants/widgets.dart';
 import 'package:seven_food_client/data/models/history_model.dart';
 import 'package:seven_food_client/screens/history_screens/history_porduct_screen.dart';
 import 'package:seven_food_client/services/history_services/history_list_service.dart';
 import 'package:intl/intl.dart';
-
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);
@@ -25,9 +25,9 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-
-      body: 
-     FutureBuilder<History>(
+      appBar:
+          appBar(context, 'История', const Icon(Icons.arrow_back), true),
+      body: FutureBuilder<History>(
         future: historyInfo,
         builder: (context, snapshot) {
           if (snapshot.hasData) {

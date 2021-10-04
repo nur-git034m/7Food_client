@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:seven_food_client/constants/color_constants.dart';
 import 'package:seven_food_client/constants/widgets.dart';
 import 'package:seven_food_client/data/models/show_case.dart';
-import 'package:seven_food_client/services/shop_product_service/show_case_service.dart';
+import 'package:seven_food_client/screens/card_screen/card_screen.dart';
+import 'package:seven_food_client/screens/history_screens/history_page.dart';
+import 'package:seven_food_client/screens/list_shop_screeens/list_shop_screen.dart';
+import 'package:seven_food_client/screens/message_screen/message_screen.dart';
+import 'package:seven_food_client/services/shop_product_service/list_shop_product_service.dart';
+
 
 class ShowScreen extends StatefulWidget {
   final String id;
@@ -18,22 +23,17 @@ class _ShowScreenState extends State<ShowScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    showCaseInfo = ShowCaseService().getShowCase(widget.id);
+    showCaseInfo = ListShopsService().getShowCase(int.parse(widget.id), context);
   }
 
-  final List<IconData> iconList = [Icons.home, Icons.person];
 
-  int _bottomNavIndex = 0;
-  int index = 3;
+  final int _bottomNavIndex = 0;
+  int index = 5;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
-          context,
-          'Витрина',
-          const Icon(
-            Icons.arrow_back_ios,
-          )),
+      appBar: 
+        appBar(context, 'Витрина',const Icon(Icons.arrow_back),true),
       body: FutureBuilder<ShowCase>(
         future: showCaseInfo,
         builder: (context, snapshot) {
@@ -104,16 +104,16 @@ class _ShowScreenState extends State<ShowScreen> {
           );
         },
       ),
-      floatingActionButton: floatinActionButton(context),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: AnimatedBottomNavigationBar(
-        activeColor: AppColors.kActiveColor,
-        inactiveColor: AppColors.kInActiveColor,
-        icons: iconList,
-        activeIndex: _bottomNavIndex,
-        gapLocation: GapLocation.center,
-        onTap: (index) => setState(() => _bottomNavIndex = index),
-      ),
+      // floatingActionButton: floatinActionButton(context),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // bottomNavigationBar: AnimatedBottomNavigationBar(
+      //   activeColor: AppColors.kActiveColor,
+      //   inactiveColor: AppColors.kInActiveColor,
+      //   icons: iconList,
+      //   activeIndex: _bottomNavIndex,
+      //   gapLocation: GapLocation.center,
+      //   onTap: (index) => setState(() => pages[_bottomNavIndex] ),
+      // ),
     );
   }
 

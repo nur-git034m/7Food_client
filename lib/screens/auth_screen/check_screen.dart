@@ -21,7 +21,7 @@ class CheckScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: appBar(context, numField, const Icon(Icons.arrow_back_ios)),
+      appBar: appBar(context, numField, const Icon(Icons.arrow_back_ios),true),
       body: SafeArea(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:seven_food_client/constants/color_constants.dart';
+import 'package:seven_food_client/constants/widgets.dart';
 import 'package:seven_food_client/data/models/shops_models.dart';
+import 'package:seven_food_client/screens/card_screen/card_screen.dart';
+import 'package:seven_food_client/screens/history_screens/history_page.dart';
 import 'package:seven_food_client/screens/list_shop_screeens/show_screen.dart';
 import 'package:seven_food_client/screens/map_screen/map_screen.dart';
+import 'package:seven_food_client/screens/message_screen/message_screen.dart';
 import 'package:seven_food_client/services/shop_product_service/list_shop_product_service.dart';
 
 class List_shops_map extends StatefulWidget {
@@ -19,7 +23,7 @@ class _List_shops_mapState extends State<List_shops_map> {
     showInfo = ListShopsService().getListofLocations();
   }
 
-  final List<IconData> iconList = [Icons.home, Icons.person];
+  
   bool selectedColor = true;
 
   int _bottomNavIndex = 0;
@@ -31,6 +35,8 @@ class _List_shops_mapState extends State<List_shops_map> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: 
+        appBar(context, '7Food на карте',const Icon(Icons.arrow_back),false),
       body: FutureBuilder<ListShops>(
         future: showInfo,
         builder: (context, snapshot) {
