@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:seven_food_client/constants/color_constants.dart';
 import 'package:seven_food_client/constants/widgets.dart';
 import 'package:seven_food_client/data/models/history_details.dart';
-import 'package:seven_food_client/screens/card_screen/card_screen.dart';
+import 'package:seven_food_client/screens/card_screen/profile_screen.dart';
 import 'package:seven_food_client/screens/list_shop_screeens/list_shop_screen.dart';
 import 'package:seven_food_client/services/history_services/history_details.dart';
 

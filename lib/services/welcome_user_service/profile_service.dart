@@ -9,7 +9,7 @@ class ProfileService {
    Future<User> ProfileNameAndPhone() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString('token');
-    print(token);
+    
 
     var headers = {
       'Content-Language': 'ru',
@@ -32,7 +32,7 @@ class ProfileService {
     String phone = phoneNumber.substring(0, 10);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString('token');
-    print(token);
+    
 
     var headers = {
       'Content-Language': 'ru',

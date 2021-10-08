@@ -49,6 +49,8 @@ dependencies:
   qr_code_scanner: ^0.5.2
   url_launcher: ^6.0.0
   flutter_pusher: ^1.0.3
+  webview_flutter: ^2.1.1
+  
   custom_navigator:
     git:
       url: https://github.com/kjawadDeveloper/Custom-navigator.git

@@ -21,7 +21,7 @@ class CheckScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: appBar(context, numField, const Icon(Icons.arrow_back_ios),true),
+      appBar: appBar(context, numField, const Icon(Icons.arrow_back_ios), true),
       body: SafeArea(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -57,11 +57,10 @@ class CheckScreen extends StatelessWidget {
                   onChanged: (value) {
                     print(value);
                   },
-                
                   onSaved: (value) => pinCodeController.text = value!,
                   onCompleted: (value) {
-                  UserService().toConfirmCheckAuth(
-                  numField, pinCodeController.text, context);
+                    UserService().toConfirmCheckAuth(
+                        numField, pinCodeController.text, context);
                     (value) => pinCodeController.text = value!;
                   },
                   appContext: context,
@@ -93,18 +92,15 @@ class CheckScreen extends StatelessWidget {
                 vertical: screenSize.height * 0.02,
                 horizontal: screenSize.width * 0.320,
               ),
-              shape: const StadiumBorder(),
               primary: AppColors.kbackground,
             ),
-            //     onPressed: () { Navigator.push(
-            // context, MaterialPageRoute(builder: (context) => const AuthScreen())); },
             onPressed: () {
-                final isValid = _formKey.currentState!.validate();
-                if (isValid) {
-                  _formKey.currentState!.save();
-                  final message = 'Telephone: $numField ';
-                  UserService().toConfirmNumService(numField, message ,context);
-                }
+              final isValid = _formKey.currentState!.validate();
+              if (isValid) {
+                _formKey.currentState!.save();
+                final message = 'Telephone: $numField ';
+                UserService().toConfirmNumService(numField, message, context);
+              }
             },
             child: const Text(
               'Войти',

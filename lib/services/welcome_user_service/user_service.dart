@@ -4,35 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:seven_food_client/data/models/User.dart';
 import 'package:seven_food_client/screens/auth_screen/check_screen.dart';
 import 'package:seven_food_client/screens/auth_screen/welcome_screeen.dart';
+import 'package:seven_food_client/screens/card_screen/payment_method_screen.dart';
 import 'package:seven_food_client/screens/list_shop_screeens/home_page_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class UserService {
-
-
   Future<void> loginByPassword(String phone, String password, context) async {
     final response = await http.post(Uri.parse(
         'https://7food.kz/api/auth/login?phone=$phone&password=$password'));
     if (response.statusCode == 200) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => CheckScreen(numField: phone,)));
+          context,
+          MaterialPageRoute(
+              builder: (context) => CheckScreen(
+                    numField: phone,
+                  )));
       SharedPreferences _prefs = await SharedPreferences.getInstance();
       String _token = json.decode(response.body)['token'];
       int _id = json.decode(response.body)['id'];
       _prefs.setString('token', _token);
       _prefs.setInt('id', _id);
+
       print('${_prefs.getInt('id')}');
     } else {
       print(json.decode(response.body)['message']);
       print(response.statusCode);
     }
   }
-
-
-
-
-
 
   Future<void> toAuth(String name, String phoneNumber, String password,
       String passwordConfirmation, context) async {
@@ -52,6 +51,7 @@ class UserService {
               builder: (context) => CheckScreen(
                     numField: phoneNumber,
                   )));
+      // Navigator.push(context, MaterialPageroute(builder: (context) =>PayMethod()));
     } else {
       print(json.decode(response.body)['message']);
       print(response.statusCode);
@@ -64,6 +64,13 @@ class UserService {
         'https://7food.kz/api/auth/register/confirm?phone=$phoneNumber&verification_code=$verificationCode'));
 
     if (response.statusCode == 200) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String _token = json.decode(response.body)['token'];
+      int _id = json.decode(response.body)['id'];
+      prefs.setString('token', _token);
+      prefs.setInt('id', _id);
+
+      //id to string token
       // print(response.body);
       // print('dsa');
       Navigator.push(context,
@@ -82,9 +89,7 @@ class UserService {
       // print(response.body);
       // print('dsa');
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>Homepage()));
+          context, MaterialPageRoute(builder: (context) => const Homepage()));
     } else {
       print(json.decode(response.body)['message']);
       print(response.statusCode);
@@ -106,4 +111,29 @@ class UserService {
       print(response.statusCode);
     }
   }
+
+  Future<void> toLogout(context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? token = prefs.getString('token');
+
+    var headers = {
+      'Authorization': 'Bearer $token',
+    };
+
+    http.Response response =
+        await http.post(Uri.parse('https://7food.kz/api/auth/logout'),headers: headers);
+
+    if (response.statusCode == 200) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.clear();
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const WelcomeScreen()));
+    } else {
+      print(json.decode(response.body)['message']);
+      print(response.statusCode);
+    }
+  }
 }
+
+
+//logout remove token 

@@ -4,8 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:pin_dot/pin_dot.dart';
 import 'package:pin_keyboard/pin_keyboard.dart';
+import 'package:seven_food_client/constants/widgets.dart';
 import 'package:seven_food_client/screens/list_shop_screeens/home_page_screen.dart';
 import 'package:seven_food_client/screens/list_shop_screeens/list_shop_screen.dart';
+import 'package:seven_food_client/services/welcome_user_service/user_service.dart';
 
 class QuickEntryPage extends StatefulWidget {
   const QuickEntryPage({Key? key}) : super(key: key);
@@ -139,15 +141,27 @@ class _QuickEntryPageState extends State<QuickEntryPage> {
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     return Scaffold(
+     
       body: Stack(
         children: [
           Container(
+            
             width: size.width,
             alignment: Alignment.topCenter,
-            margin: const EdgeInsets.only(top: 147),
+            margin: const EdgeInsets.only(top: 47),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Row(
+                  children: [
+                    TextButton(onPressed: (){}, child: const Text('Закрыт')),
+                    const SizedBox(width: 260,),
+                    IconButton(onPressed: (){
+                      UserService().toLogout(context);
+                    }, icon: const Icon(Icons.logout),),
+                  ],
+                ),
+              const SizedBox(height: 140,),
                 const Text(
                   'Быстрый вход',
                   style: TextStyle(
@@ -185,8 +199,9 @@ class _QuickEntryPageState extends State<QuickEntryPage> {
                   left: size.width * 0.15,
                   right: size.width * 0.15),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                
                 children: [
+                  const SizedBox(height: 470),
                   PinKeyboard(
                     length: 4,
                     enableBiometric: true,

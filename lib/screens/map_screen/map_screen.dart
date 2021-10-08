@@ -10,7 +10,7 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  List<bool> _selectedBotton = [true, false];
+  List<bool> selectedBotton = [true, false];
 
   @override
   void initState() {

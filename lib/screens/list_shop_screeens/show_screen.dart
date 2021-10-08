@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:seven_food_client/constants/color_constants.dart';
 import 'package:seven_food_client/constants/widgets.dart';
 import 'package:seven_food_client/data/models/show_case.dart';
-import 'package:seven_food_client/screens/card_screen/card_screen.dart';
+import 'package:seven_food_client/screens/card_screen/profile_screen.dart';
 import 'package:seven_food_client/screens/history_screens/history_page.dart';
 import 'package:seven_food_client/screens/list_shop_screeens/list_shop_screen.dart';
 import 'package:seven_food_client/screens/message_screen/message_screen.dart';
@@ -27,7 +27,7 @@ class _ShowScreenState extends State<ShowScreen> {
   }
 
 
-  final int _bottomNavIndex = 0;
+  final int bottomNavIndex = 0;
   int index = 5;
   @override
   Widget build(BuildContext context) {

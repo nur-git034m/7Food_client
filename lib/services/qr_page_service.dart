@@ -9,7 +9,7 @@ class QrService {
   Future<String> postQrScanner(String fridgeId, context) async {
      SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString('token');
-    print(token);
+    
     var headers = {
       'Content-Language': 'ru',
       'Authorization': 'Bearer $token',

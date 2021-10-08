@@ -5,14 +5,10 @@ import 'package:seven_food_client/constants/color_constants.dart';
 import 'package:seven_food_client/constants/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MessageScreen extends StatefulWidget {
+class MessageScreen extends StatelessWidget {
   const MessageScreen({Key? key}) : super(key: key);
 
-  @override
-  _MessageScreenState createState() => _MessageScreenState();
-}
-
-class _MessageScreenState extends State<MessageScreen> {
+ 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;

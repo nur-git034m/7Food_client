@@ -38,4 +38,8 @@ class Data {
     data['bonus'] = this.bonus;
     return data;
   }
+  
+
+
+
 }

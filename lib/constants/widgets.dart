@@ -25,7 +25,7 @@ AppBar appBar(BuildContext context, String text, Icon icon , bool withBack) {
         onPressed: () {
           Navigator.pop(context);
         },
-      ): SizedBox());
+      ): const SizedBox());
 }
 
 

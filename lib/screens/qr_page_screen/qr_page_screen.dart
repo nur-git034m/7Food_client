@@ -23,23 +23,20 @@ class _QrPageScreenState extends State<QrPageScreen> {
   List showcasesID = [];
 
   void getLength() async {
-    showInfo = await ListShopsService().getListofLocations()  ;
-     for(var i in showInfo.data){
-        showcasesID.add(i.id);
+    showInfo = await ListShopsService().getListofLocations();
+    for (var i in showInfo.data) {
+      showcasesID.add(i.id);
     }
     print(' $showcasesID');
   }
-   @override
-   void initState() { 
-     super.initState();
-     getLength();
-   }
-   
-  
+
+  @override
+  void initState() {
+    super.initState();
+    getLength();
+  }
 
   late ListShops showInfo;
-
- 
 
   final textEditingController = TextEditingController();
 
@@ -48,8 +45,6 @@ class _QrPageScreenState extends State<QrPageScreen> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   final OpenWithID _openWithID = OpenWithID();
 
-  // In order to get hot reload to work we need to pause the camera if the platform
-  // is android, or resume the camera if the platform is iOS.
   @override
   void reassemble() {
     super.reassemble();
@@ -66,10 +61,9 @@ class _QrPageScreenState extends State<QrPageScreen> {
     controller.scannedDataStream.listen((scanData) {
       print('ScanData code: ${scanData.code}');
       controller.pauseCamera();
-      if(showcasesID.contains(int.parse(scanData.code))){
-        
+      if (showcasesID.contains(int.parse(scanData.code))) {
         QrService().postQrScanner(scanData.code, context);
-      }else{
+      } else {
         controller.resumeCamera();
       }
     });
@@ -118,7 +112,7 @@ class _QrPageScreenState extends State<QrPageScreen> {
                   ),
                 ],
               ),
-           _openWithID.getOpenWithID( showcasesID , controller, context),
+              _openWithID.getOpenWithID(showcasesID, controller, context),
               // Column(
               //   mainAxisAlignment: MainAxisAlignment.center,
               //   children: [
@@ -234,7 +228,9 @@ class _QrPageScreenState extends State<QrPageScreen> {
           ),
         ),
         Container(
-            padding:  EdgeInsets.only(top: screenSize.width * 1,),
+            padding: EdgeInsets.only(
+              top: screenSize.width * 1,
+            ),
             child: const Center(
                 child: Text(
               'Введите камеру на QR code',
@@ -244,7 +240,7 @@ class _QrPageScreenState extends State<QrPageScreen> {
               ),
             ))),
         Container(
-          padding:  const EdgeInsets.only(top: 510),
+          padding: const EdgeInsets.only(top: 510),
           child: Center(
               child: IconButton(
             icon: const Icon(FontAwesomeIcons.times),

@@ -26,7 +26,7 @@ class _HistoryPageState extends State<HistoryPage> {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar:
-          appBar(context, 'История', const Icon(Icons.arrow_back), true),
+          appBar(context, 'История', const Icon(Icons.arrow_back), false),
       body: FutureBuilder<History>(
         future: historyInfo,
         builder: (context, snapshot) {
